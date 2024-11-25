@@ -26,12 +26,13 @@ pipeline{
                 script {
                     withSonarQubeEnv('sonar') {
                                     sh '''${scannerHome}/bin/sonar-scanner \
-                                                    -Dsonar.projectKey= employee \
-                                                    -Dsonar.projectName= employee \
-                                                    -Dsonar.projectVersion= 1.0 \
-                                                    -Dsonar.sources= src/  \
-                                                    -Dsonar.host.url= http://54.172.159.143/
-                                                    -Dsonar.java.checkstyle.reportPaths= target/checkstyle-result.xml
+                                            -Dsonar.projectKey=employee \
+                                            -Dsonar.projectName=employee \
+                                            -Dsonar.projectVersion=1.0 \
+                                            -Dsonar.sources=src/ \
+                                            -Dsonar.host.url=http://54.172.159.143/ \
+                                            -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
+
                                         '''
                                     }
                 }
