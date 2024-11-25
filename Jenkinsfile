@@ -26,16 +26,16 @@ pipeline{
 
         stage("sonar Analysis"){
             environment {
-                scannerHome = tool 'sonar4.7'
+                scannerHome = tool 'sonar6.2'
             }
             steps{
                withSonarQubeEnv('sonar') {
                     sh '''${scannerHome}/bin/sonar-scanner \
-                                    -Dsonar.projectKey=banking \
-                                    -Dsonar.projectName=banking-microservice-repo \
+                                    -Dsonar.projectKey=employeemgmt \
+                                    -Dsonar.projectName=employeemgmt \
                                     -Dsonar.projectVersion=1.0 \
                                     -Dsonar.sources=src/ \
-                                    -Dsonar.java.binaries=target/classes \
+                                    -Dsonar.java.binaries=target/test-classes/com/employees/employeemanager/ \
                                     -Dsonar.jacoco.reportsPath=target/jacoco.exec \
                                     -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
                         '''
@@ -58,15 +58,15 @@ pipeline{
                     nexusArtifactUploader(
                                 nexusVersion: 'nexus3',
                                 protocol: 'http',
-                                nexusUrl: '172.16.12.32:8080',
+                                nexusUrl: '172.48.16.120:8081',
                                 groupId: 'QA',
-                                version: "${BUILD_ID}-${BUILD_TIMESTAMP}",
-                                repository: 'bank-microservice',
-                                credentialsId: 'nexuslogin',
+                                version: "${BUILD_ID}",
+                                repository: 'employee-repo',
+                                credentialsId: 'nexus',
                                 artifacts: [
-                                        [artifactId: microserviceapp,
+                                        [artifactId: employeemgmt,
                                         classifier: '',
-                                        file: 'accounts' + version + '.jar',
+                                        file: 'target/employeemanager-0.0.1-SNAPSHOT.jar',
                                         type: 'jar']
                                     ]
                 )
