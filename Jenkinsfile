@@ -30,7 +30,7 @@ pipeline{
                                             -Dsonar.projectName=employee \
                                             -Dsonar.projectVersion=1.0 \
                                             -Dsonar.sources=src/ \
-                                            -Dsonar.host.url=http://54.172.159.143/ \
+                                            -Dsonar.host.url=http://172.48.16.133/ \
                                             -Dsonar.java.binaries=target/test-classes/com/employees/employeemanager/ \
                                             -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
 
