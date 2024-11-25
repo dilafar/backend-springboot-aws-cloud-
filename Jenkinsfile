@@ -62,7 +62,7 @@ pipeline{
                                 repository: 'employee-repo',
                                 credentialsId: 'nexus',
                                 artifacts: [
-                                        [artifactId: employeemgmt,
+                                        [artifactId: 'employeemgmt',
                                         classifier: '',
                                         file: 'target/employeemanager-0.0.1-SNAPSHOT.jar',
                                         type: 'jar']
