@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +28,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public void createEmployee(EmployeeDto employeeDto) {
         Employee employee = EmployeeMapper.mapToEmployee(employeeDto,new Employee());
+        employee.setEmployeeCode(UUID.randomUUID().toString());
         Optional<Employee> optionalEmployee = employeeRepository.findByPhone(employeeDto.getPhone());
         if(optionalEmployee.isPresent()){
             throw new EmployeeAlreadyExistsException("Employee already registered with given mobileNumber"+employeeDto.getPhone());
