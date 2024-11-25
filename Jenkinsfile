@@ -23,16 +23,19 @@ pipeline{
                 scannerHome = tool 'sonar6.2'
             }
             steps{
-               withSonarQubeEnv('sonar') {
-                    sh '''${scannerHome}/bin/sonar-scanner \
-                                    -Dsonar.projectKey=employeemgmt \
-                                    -Dsonar.projectName=employeemgmt \
-                                    -Dsonar.projectVersion=1.0 \
-                                    -Dsonar.sources=src/ \
-                                    -Dsonar.java.binaries=target/test-classes/com/employees/employeemanager/ \
-                                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
-                        '''
-                    }
+                script {
+                    withSonarQubeEnv('sonar') {
+                                    sh '''${scannerHome}/bin/sonar-scanner \
+                                                    -Dsonar.projectKey= employee \
+                                                    -Dsonar.projectName= employee \
+                                                    -Dsonar.projectVersion= 1.0 \
+                                                    -Dsonar.sources= src/  \
+                                                    -Dsonar.host.url= http://54.172.159.143/
+                                                    -Dsonar.java.checkstyle.reportPaths= target/checkstyle-result.xml
+                                        '''
+                                    }
+                }
+
                 }
 
             }
