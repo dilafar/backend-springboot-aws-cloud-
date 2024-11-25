@@ -71,9 +71,17 @@ pipeline{
             }
         }
 
+        stage("ssh agent"){
+                    steps{
+                       script {
+                               def command = 'mkdir -p sample'
+                               sshagent(['ec2-server-key']) {
+                                   sh "ssh -o StrictHostKeyChecking=no ubuntu@54.165.248.60 ${command}"
+                               }
 
-
+                    }
+                }
 
         }
     }
-
+}
