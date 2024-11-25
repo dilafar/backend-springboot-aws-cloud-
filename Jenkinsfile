@@ -6,12 +6,6 @@ pipeline{
     }
 
     stages{
-        stage("Fetch Code"){
-            steps{
-               git branch: 'main', url: 'https://github.com/dilafar/backend-springboot-aws-cloud-.git'
-            }
-        }
-
         stage("Build"){
             steps{
                sh 'mvn clean package'
