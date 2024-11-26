@@ -7,8 +7,8 @@ pipeline{
 
     environment {
         AWS_S3_BUCKET = 'cicdbeans3'
-        AWS_EB_APP_NAME = 'elb-stack-test'
-        AWS_EB_ENVIRONMENT = 'Elb-stack-test-env'
+        AWS_EB_APP_NAME = 'new-employee'
+        AWS_EB_ENVIRONMENT = 'New-employee-env'
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         ARTIFACT_NAME = "employeemanager-v${BUILD_ID}.jar"
     }
@@ -38,7 +38,7 @@ pipeline{
                                             -Dsonar.projectName=employee \
                                             -Dsonar.projectVersion=1.0 \
                                             -Dsonar.sources=src/ \
-                                            -Dsonar.host.url=http://172.48.16.133/ \
+                                            -Dsonar.host.url=http://172.48.16.144/ \
                                             -Dsonar.java.binaries=target/test-classes/com/employees/employeemanager/ \
                                             -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
 
