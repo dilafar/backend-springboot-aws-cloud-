@@ -7,8 +7,8 @@ pipeline{
 
     environment {
         AWS_S3_BUCKET = 'cicdbeans3'
-        AWS_EB_APP_NAME = 'ansible-employee'
-        AWS_EB_ENVIRONMENT = 'Ansible-employee-env'
+        AWS_EB_APP_NAME = 'elb-stack-test'
+        AWS_EB_ENVIRONMENT = 'Elb-stack-test-env'
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         ARTIFACT_NAME = "employeemanager-v${BUILD_ID}.jar"
     }
