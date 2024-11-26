@@ -73,14 +73,14 @@ pipeline{
 
             stage("ansible deployment") {
                     steps {
-                       ansiblePlaybook(
-                               playbook: 'ansible/ebs-deploy.yml',
-                               inventory: 'ansible/stage.inventory',
-                               installation: 'ansible',
-                               credentialsId: 'ec2-server-key',
-                               colorized: true,
-                               disableHostKeyChecking: true,
-
+                       ansiblePlaybook([
+                                playbook: 'ansible/ebs-deploy.yml',
+                                inventory: 'ansible/stage.inventory',
+                                installation: 'ansible',
+                                credentialsId: 'ec2-server-key',
+                                colorized: true,
+                                disableHostKeyChecking: true,
+                                ]
                                )
                     }
                 }
