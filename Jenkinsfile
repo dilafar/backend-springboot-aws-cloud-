@@ -88,8 +88,10 @@ pipeline{
         stage("ssh agent") {
             steps {
                 script {
-                    def command = 'mkdir -p sample'
+                    def command = 'bash ./git-command.sh'
                     sshagent(['ec2-server-key']) {
+                        sh "scp git-command.sh ubuntu@172.48.16.90:/home/ubuntu"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.48.16.90 sudo chmod +x git-command.sh"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@172.48.16.90 '${command}'"
                     }
                 }
