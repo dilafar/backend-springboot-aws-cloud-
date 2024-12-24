@@ -3,7 +3,7 @@ services:
     image: mysql
     container_name: employeedb
     ports:
-      - "3306:3306"
+      - "3307:3306"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
@@ -14,5 +14,34 @@ services:
       MYSQL_DATABASE: employeemanager
       MYSQL_ROOT_PASSWORD: root
 
+  employees:
+    image: "fadhiljr/nginxapp:employee-backend-v12"
+    container_name: employee
+    ports:
+      - "8080:8080"
+    depends_on:
+      employeedb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "employee"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://employeedb:3306/employeemanager"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
 
+  prometheus:
+    image: prom/prometheus:v2.44.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:9.5.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
 
