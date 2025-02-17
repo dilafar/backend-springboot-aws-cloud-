@@ -16,7 +16,8 @@ spring:
     name: "employee"
 
 management:
-    endpoints:
-      web:
-        exposure:
-          include: [ "prometheus" ]
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

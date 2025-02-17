@@ -9,7 +9,8 @@ import com.employees.employeemanager.mapper.EmployeeMapper;
 import com.employees.employeemanager.repository.EmployeeRepository;
 import com.employees.employeemanager.service.IEmployeeService;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,8 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImpl implements IEmployeeService {
-    private static final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
+    public static final Logger logger = LogManager.getLogger(EmployeeServiceImpl.class);
     private EmployeeRepository employeeRepository;
     /**
      * @param employeeDto
@@ -33,6 +35,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         if(optionalEmployee.isPresent()){
             throw new EmployeeAlreadyExistsException("Employee already registered with given mobileNumber"+employeeDto.getPhone());
         }
+        logger.info("EmployeeController:create employee payload :",employee);
         employeeRepository.save(employee);
     }
 
@@ -61,6 +64,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         );
         EmployeeMapper.mapToEmployee(employeeDto,employee);
         employeeRepository.save(employee);
+        logger.info("EmployeeController:update employee payload :",employee);
         isupdated = true;
         return isupdated;
     }
@@ -76,6 +80,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                 () -> new ResourceNotFoundException("employee","employeeId",employeeId.toString())
         );
         employeeRepository.deleteById(employeeId);
+        logger.info("EmployeeController: employee deleted from repo :",employeeId);
         isupdated = true;
         return isupdated;
     }

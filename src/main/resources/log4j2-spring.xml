@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Http name="SplunkAppender" url="http://localhost:8088/services/collector">
+            <Property name="token" value="YOUR_SPLUNK_HEC_TOKEN" />
+            <PatternLayout pattern="%m%n" />
+        </Http>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="SplunkAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
